@@ -1,0 +1,10 @@
+target/
+.idea/
+*.iml
+.env
+.env.local
+.env.*.local
+config/database.properties
+logs/
+*.log
+

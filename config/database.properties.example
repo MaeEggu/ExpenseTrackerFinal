@@ -1,0 +1,7 @@
+# Copy this file to config/database.properties and replace the values below.
+# Do not upload config/database.properties to GitHub because it contains your database password.
+# Supabase Project URL/API keys are not used for JDBC. Use the Postgres connection values from Supabase > Connect.
+
+db.url=jdbc:postgresql://aws-0-your-region.pooler.supabase.com:5432/postgres?sslmode=require
+db.user=postgres.qypcjqytkeclgzmbhvqp
+db.password=your_database_password

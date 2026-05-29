@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="720.0" prefWidth="1100.0" styleClass="app-root" stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EditExpenseController">
+    <left>
+        <VBox prefWidth="248.0" spacing="18.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="28.0" left="22.0" right="22.0" top="28.0" />
+            </padding>
+            <VBox spacing="6.0" styleClass="sidebar-brand">
+                <Label text="Expense Tracker" styleClass="sidebar-title" />
+                <Label text="Smart daily spending" styleClass="sidebar-subtitle" />
+            </VBox>
+            <Region prefHeight="12.0" />
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showHome" text="Home"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M4 11 L12 4 L20 11 L20 20 L15 20 L15 14 L9 14 L9 20 L4 20 Z"
+                             styleClass="nav-svg" />
+                </graphic>
+            </Button>
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showAddExpense" text="Add Expense"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M12 5 L12 19 M5 12 L19 12" styleClass="nav-svg" />
+                </graphic>
+            </Button>
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showViewExpense" text="View Expenses"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M7 3 L17 3 Q19 3 19 5 L19 21 L5 21 L5 5 Q5 3 7 3 Z M8 8 L16 8 M8 12 L16 12 M8 16 L13 16"
+                             styleClass="nav-svg" />
+                </graphic>
+            </Button>
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showEditExpense" text="Edit Expense"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button-active">
+                <graphic>
+                    <SVGPath content="M7 3 L15 3 Q17 3 17 5 L17 10 M5 5 L5 21 L15 21 M8 8 L14 8 M8 12 L12 12 M13 17 L18 12 L20 14 L15 19 L12 20 Z"
+                             styleClass="nav-svg-active" />
+                </graphic>
+            </Button>
+            <Region VBox.vgrow="ALWAYS" />
+            <VBox spacing="4.0" styleClass="sidebar-note">
+                <Label text="Current Base" styleClass="sidebar-note-label" />
+                <Label text="PHP" styleClass="sidebar-note-value" />
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="16.0" styleClass="page-section">
+            <VBox spacing="8.0">
+                <Label text="Edit Expenses" styleClass="page-title" />
+                <Label text="Select an expense, update its details, or delete records from the current list."
+                       styleClass="page-subtitle" />
+            </VBox>
+
+            <TableView fx:id="expenseTable" prefHeight="260.0" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="itemNameColumn" prefWidth="150.0" text="Item Name" />
+                    <TableColumn fx:id="categoryColumn" prefWidth="130.0" text="Category" />
+                    <TableColumn fx:id="currencyColumn" prefWidth="90.0" text="Currency" />
+                    <TableColumn fx:id="amountColumn" prefWidth="110.0" text="Amount" />
+                    <TableColumn fx:id="phpValueColumn" prefWidth="150.0" text="Converted PHP Value" />
+                    <TableColumn fx:id="dateAddedColumn" prefWidth="130.0" text="Date Added" />
+                </columns>
+            </TableView>
+
+            <GridPane hgap="18.0" vgap="14.0" styleClass="form-panel">
+                <padding>
+                    <Insets bottom="22.0" left="24.0" right="24.0" top="22.0" />
+                </padding>
+                <Label text="Item Name" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="itemNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Amount" styleClass="field-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="amountField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Currency" styleClass="field-label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <ComboBox fx:id="currencyComboBox" maxWidth="Infinity" GridPane.columnIndex="3"
+                          GridPane.rowIndex="0" />
+
+                <Label text="Category" styleClass="field-label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ComboBox fx:id="categoryComboBox" maxWidth="Infinity" GridPane.columnIndex="3"
+                          GridPane.rowIndex="1" />
+
+                <HBox spacing="12.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                    <Button mnemonicParsing="false" onAction="#handleUpdateExpense" text="Update"
+                            styleClass="primary-button" />
+                    <Button mnemonicParsing="false" onAction="#handleDeleteSelected" text="Delete Selected"
+                            styleClass="danger-button" />
+                    <Button mnemonicParsing="false" onAction="#handleDeleteAll" text="Delete All"
+                            styleClass="danger-outline-button" />
+                    <Button mnemonicParsing="false" onAction="#handleClearForm" text="Clear"
+                            styleClass="secondary-button" />
+                </HBox>
+
+                <Label fx:id="messageLabel" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3"
+                       GridPane.rowIndex="3" />
+            </GridPane>
+        </VBox>
+    </center>
+</BorderPane>

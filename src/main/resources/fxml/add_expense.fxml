@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="720.0" prefWidth="1100.0" styleClass="app-root" stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.AddExpenseController">
+    <left>
+        <VBox prefWidth="248.0" spacing="18.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="28.0" left="22.0" right="22.0" top="28.0" />
+            </padding>
+
+            <VBox spacing="6.0" styleClass="sidebar-brand">
+                <Label text="Expense Tracker" styleClass="sidebar-title" />
+                <Label text="Smart daily spending" styleClass="sidebar-subtitle" />
+            </VBox>
+
+            <Region prefHeight="12.0" />
+
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showHome" text="Home"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M4 11 L12 4 L20 11 L20 20 L15 20 L15 14 L9 14 L9 20 L4 20 Z"
+                             styleClass="nav-svg" />
+                </graphic>
+            </Button>
+
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showAddExpense" text="Add Expense"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button-active">
+                <graphic>
+                    <SVGPath content="M12 5 L12 19 M5 12 L19 12" styleClass="nav-svg-active" />
+                </graphic>
+            </Button>
+
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showViewExpense" text="View Expenses"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M7 3 L17 3 Q19 3 19 5 L19 21 L5 21 L5 5 Q5 3 7 3 Z M8 8 L16 8 M8 12 L16 12 M8 16 L13 16"
+                             styleClass="nav-svg" />
+                </graphic>
+            </Button>
+
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showEditExpense" text="Edit Expense"
+                    contentDisplay="LEFT" graphicTextGap="12.0" styleClass="nav-button">
+                <graphic>
+                    <SVGPath content="M7 3 L15 3 Q17 3 17 5 L17 10 M5 5 L5 21 L15 21 M8 8 L14 8 M8 12 L12 12 M13 17 L18 12 L20 14 L15 19 L12 20 Z"
+                             styleClass="nav-svg" />
+                </graphic>
+            </Button>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <VBox spacing="4.0" styleClass="sidebar-note">
+                <Label text="Current Base" styleClass="sidebar-note-label" />
+                <Label text="PHP" styleClass="sidebar-note-value" />
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22.0" styleClass="add-page-section">
+            <HBox alignment="CENTER_LEFT" spacing="16.0">
+                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                    <Label text="Add Expense" styleClass="page-title" />
+                    <Label text="Record spending, preview its PHP value, and keep your totals up to date."
+                           styleClass="page-subtitle" />
+                </VBox>
+                <Label text="Supabase Connected" styleClass="status-pill" />
+            </HBox>
+
+            <HBox spacing="22.0" VBox.vgrow="ALWAYS">
+                <VBox spacing="22.0" styleClass="expense-form-card" HBox.hgrow="ALWAYS">
+                    <VBox spacing="6.0">
+                        <Label text="Expense Details" styleClass="section-title-large" />
+                        <Label text="Enter the basic details for this transaction." styleClass="muted-text" />
+                    </VBox>
+
+                    <GridPane hgap="18.0" vgap="16.0" styleClass="expense-form-grid">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+                        </columnConstraints>
+
+                        <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Item Name" styleClass="field-label" />
+                            <TextField fx:id="itemNameField" promptText="Example: Lunch" />
+                        </VBox>
+
+                        <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="Amount" styleClass="field-label" />
+                            <TextField fx:id="amountField" promptText="Example: 150.00" />
+                        </VBox>
+
+                        <VBox spacing="8.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <Label text="Currency" styleClass="field-label" />
+                            <ComboBox fx:id="currencyComboBox" maxWidth="Infinity" />
+                        </VBox>
+
+                        <VBox spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <Label text="Category" styleClass="field-label" />
+                            <ComboBox fx:id="categoryComboBox" maxWidth="Infinity" promptText="Select category" />
+                        </VBox>
+                    </GridPane>
+
+                    <VBox spacing="8.0" styleClass="conversion-preview">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label text="Live PHP Preview" styleClass="preview-title" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="Auto-updates" styleClass="preview-chip" />
+                        </HBox>
+                        <Label fx:id="conversionPreviewLabel" text="Enter an amount to preview the converted PHP value."
+                               wrapText="true" styleClass="preview-value" />
+                    </VBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Button mnemonicParsing="false" onAction="#handleAddExpense" text="Save Expense"
+                                styleClass="primary-button" />
+                        <Button mnemonicParsing="false" onAction="#handleClear" text="Clear"
+                                styleClass="secondary-button" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="messageLabel" wrapText="true" styleClass="form-message" />
+                    </HBox>
+                </VBox>
+
+                <VBox prefWidth="292.0" spacing="18.0" styleClass="stats-panel">
+                    <VBox spacing="6.0">
+                        <Label text="Quick Stats" styleClass="section-title-large" />
+                        <Label text="Snapshot from your saved expenses." styleClass="muted-text" />
+                    </VBox>
+
+                    <VBox spacing="16.0">
+                        <VBox spacing="5.0" styleClass="stat-row">
+                            <Label text="Today's Expenses" styleClass="stat-label" />
+                            <Label fx:id="todayExpensesValueLabel" text="PHP 0.00" styleClass="stat-value" />
+                        </VBox>
+
+                        <VBox spacing="5.0" styleClass="stat-row">
+                            <Label text="Monthly Total" styleClass="stat-label" />
+                            <Label fx:id="monthlyTotalValueLabel" text="PHP 0.00" styleClass="stat-value" />
+                        </VBox>
+
+                        <VBox spacing="5.0" styleClass="stat-row-last">
+                            <Label text="Top Spending Category" styleClass="stat-label" />
+                            <Label fx:id="topCategoryValueLabel" text="No expenses yet" wrapText="true"
+                                   styleClass="stat-value-small" />
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
