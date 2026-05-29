@@ -33,51 +33,51 @@ The project now stores expenses permanently in a Supabase PostgreSQL database us
 
 ```text
 ExpenseTrackerFinal
-├── pom.xml
-├── README.md
-├── .gitignore
-├── .env.example
-├── config
-│   └── database.properties.example
-├── database
-│   └── schema.sql
-└── src
-    └── main
-        ├── java
-        │   ├── application
-        │   │   └── MainApp.java
-        │   ├── controller
-        │   │   ├── AddExpenseController.java
-        │   │   ├── EditExpenseController.java
-        │   │   ├── HomeController.java
-        │   │   ├── NavigationController.java
-        │   │   └── ViewExpenseController.java
-        │   ├── dao
-        │   │   └── ExpenseDAO.java
-        │   ├── database
-        │   │   ├── DatabaseConnection.java
-        │   │   ├── DatabaseConnectionTest.java
-        │   │   ├── DatabaseException.java
-        │   │   └── DatabaseSchemaSetup.java
-        │   ├── model
-        │   │   └── Expense.java
-        │   ├── repository
-        │   │   └── ExpenseRepository.java
-        │   ├── service
-        │   │   └── ExpenseService.java
-        │   ├── utility
-        │   │   ├── Converter.java
-        │   │   ├── CurrencyConverter.java
-        │   │   └── ExpenseValidator.java
-        │   └── module-info.java
-        └── resources
-            ├── css
-            │   └── style.css
-            └── fxml
-                ├── add_expense.fxml
-                ├── edit_expense.fxml
-                ├── home.fxml
-                └── view_expense.fxml
+â”œâ”€â”€ pom.xml
+â”œâ”€â”€ README.md
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ .env.example
+â”œâ”€â”€ config
+â”‚   â””â”€â”€ database.properties.example
+â”œâ”€â”€ database
+â”‚   â””â”€â”€ schema.sql
+â””â”€â”€ src
+    â””â”€â”€ main
+        â”œâ”€â”€ java
+        â”‚   â”œâ”€â”€ application
+        â”‚   â”‚   â””â”€â”€ MainApp.java
+        â”‚   â”œâ”€â”€ controller
+        â”‚   â”‚   â”œâ”€â”€ AddExpenseController.java
+        â”‚   â”‚   â”œâ”€â”€ EditExpenseController.java
+        â”‚   â”‚   â”œâ”€â”€ HomeController.java
+        â”‚   â”‚   â”œâ”€â”€ NavigationController.java
+        â”‚   â”‚   â””â”€â”€ ViewExpenseController.java
+        â”‚   â”œâ”€â”€ dao
+        â”‚   â”‚   â””â”€â”€ ExpenseDAO.java
+        â”‚   â”œâ”€â”€ database
+        â”‚   â”‚   â”œâ”€â”€ DatabaseConnection.java
+        â”‚   â”‚   â”œâ”€â”€ DatabaseConnectionTest.java
+        â”‚   â”‚   â”œâ”€â”€ DatabaseException.java
+        â”‚   â”‚   â””â”€â”€ DatabaseSchemaSetup.java
+        â”‚   â”œâ”€â”€ model
+        â”‚   â”‚   â””â”€â”€ Expense.java
+        â”‚   â”œâ”€â”€ repository
+        â”‚   â”‚   â””â”€â”€ ExpenseRepository.java
+        â”‚   â”œâ”€â”€ service
+        â”‚   â”‚   â””â”€â”€ ExpenseService.java
+        â”‚   â”œâ”€â”€ utility
+        â”‚   â”‚   â”œâ”€â”€ Converter.java
+        â”‚   â”‚   â”œâ”€â”€ CurrencyConverter.java
+        â”‚   â”‚   â””â”€â”€ ExpenseValidator.java
+        â”‚   â””â”€â”€ module-info.java
+        â””â”€â”€ resources
+            â”œâ”€â”€ css
+            â”‚   â””â”€â”€ style.css
+            â””â”€â”€ fxml
+                â”œâ”€â”€ add_expense.fxml
+                â”œâ”€â”€ edit_expense.fxml
+                â”œâ”€â”€ home.fxml
+                â””â”€â”€ view_expense.fxml
 ```
 
 ## OOP Structure
@@ -351,6 +351,15 @@ src/main/resources/fxml
 
 Open any FXML file in Scene Builder to edit the UI visually. Controller references are already configured with `fx:controller`, and the shared stylesheet is linked from each FXML file.
 
+## Live Currency Rates
+
+The app uses the free Frankfurter exchange-rate API for latest currency conversion rates:
+
+```text
+https://api.frankfurter.dev/v1/latest?base=PHP&symbols=USD,EUR,JPY
+```
+
+No API key is required. If the app cannot reach the API, it automatically falls back to the manual rates in `CurrencyConverter.java` so adding expenses still works offline.
 ## Currency Conversion
 
 The application stores the original currency and amount, then calculates a PHP value for totals and summaries. Conversion rates are centralized in:

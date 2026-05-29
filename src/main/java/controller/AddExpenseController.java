@@ -127,7 +127,8 @@ public class AddExpenseController extends NavigationController {
 
             double phpValue = expenseService.convertToPhp(amount, currency);
             conversionPreviewLabel.setText(currency + " " + String.format("%.2f", amount)
-                    + " equals " + phpFormat.format(phpValue));
+                    + " equals " + phpFormat.format(phpValue)
+                    + " â€¢ " + expenseService.getLastExchangeRateUpdateLabel());
         } catch (NumberFormatException exception) {
             conversionPreviewLabel.setText("Amount must be a valid number.");
         }
