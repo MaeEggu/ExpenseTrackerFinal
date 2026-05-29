@@ -37,6 +37,9 @@ public class AddExpenseController extends NavigationController {
     private Label conversionPreviewLabel;
 
     @FXML
+    private Label exchangeRateLabel;
+
+    @FXML
     private Label todayExpensesValueLabel;
 
     @FXML
@@ -126,9 +129,22 @@ public class AddExpenseController extends NavigationController {
             }
 
             double phpValue = expenseService.convertToPhp(amount, currency);
-            conversionPreviewLabel.setText(currency + " " + String.format("%.2f", amount)
-                    + " equals " + phpFormat.format(phpValue)
-                    + " â€¢ " + expenseService.getLastExchangeRateUpdateLabel());
+            double rate = expenseService.getExchangeRate(currency);
+
+            exchangeRateLabel.setText(
+                    "Current Rate: 1 "
+                            + currency
+                            + " = "
+                            + String.format("%.4f", rate)
+                            + " PHP");
+
+            conversionPreviewLabel.setText(
+                    currency + " "
+                            + String.format("%.2f", amount)
+                            + " = "
+                            + phpFormat.format(phpValue)
+                            + " | "
+                            + expenseService.getLastExchangeRateUpdateLabel());
         } catch (NumberFormatException exception) {
             conversionPreviewLabel.setText("Amount must be a valid number.");
         }

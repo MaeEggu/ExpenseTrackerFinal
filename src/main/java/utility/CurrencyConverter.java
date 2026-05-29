@@ -52,6 +52,9 @@ public class CurrencyConverter implements Converter {
     public String getLastExchangeRateUpdateLabel() {
         return lastExchangeRateUpdateLabel;
     }
+    public double getExchangeRate(String currency) {
+        return phpExchangeRates.getOrDefault(currency, 1.0);
+    }
 
     public void refreshExchangeRates() {
         HttpClient client = HttpClient.newBuilder()

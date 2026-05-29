@@ -120,8 +120,16 @@
                             <Region HBox.hgrow="ALWAYS" />
                             <Label text="Auto-updates" styleClass="preview-chip" />
                         </HBox>
-                        <Label fx:id="conversionPreviewLabel" text="Enter an amount to preview the converted PHP value."
-                               wrapText="true" styleClass="preview-value" />
+
+                        <Label fx:id="exchangeRateLabel"
+                               text="Current Rate: Loading..."
+                               wrapText="true"
+                               styleClass="preview-rate" />
+
+                        <Label fx:id="conversionPreviewLabel"
+                               text="Enter an amount to preview the converted PHP value."
+                               wrapText="true"
+                               styleClass="preview-value" />
                     </VBox>
 
                     <HBox alignment="CENTER_LEFT" spacing="12.0">

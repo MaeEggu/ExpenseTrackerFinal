@@ -61,15 +61,17 @@ public class ViewExpenseController extends NavigationController {
         currencyColumn.setCellValueFactory(new PropertyValueFactory<>("currency"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         phpValueColumn.setCellValueFactory(new PropertyValueFactory<>("convertedPhpValue"));
-        dateAddedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getDateAdded().format(dateFormatter)));
+
+        dateAddedColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getDateAdded().format(dateFormatter)));
 
         expenseTable.setItems(expenseService.getExpenses());
 
         try {
             expenseService.refreshExpenses();
         } catch (DatabaseException exception) {
-            totalExpensesLabel.setText("Total Expenses: PHP 0.00");
+            totalExpensesLabel.setText("Total Expenses: ₱0.00");
             categorySummaryLabel.setText(exception.getMessage());
             categorySummaryLabel.getStyleClass().add("error-text");
             categoryPieChart.setData(FXCollections.observableArrayList());
@@ -80,7 +82,10 @@ public class ViewExpenseController extends NavigationController {
     }
 
     private void updateSummary() {
-        totalExpensesLabel.setText("Total Expenses: " + phpFormat.format(expenseService.getTotalPhp()));
+
+        totalExpensesLabel.setText(
+                "Total Expenses: " +
+                        phpFormat.format(expenseService.getTotalPhp()));
 
         Map<String, Double> categoryTotals = expenseService.getTotalPhpByCategory();
 
@@ -100,6 +105,7 @@ public class ViewExpenseController extends NavigationController {
         }
 
         categorySummaryLabel.setText(summaryBuilder.toString().trim());
+
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {

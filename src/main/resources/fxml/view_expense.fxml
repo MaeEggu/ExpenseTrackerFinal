@@ -79,15 +79,41 @@
             </TableView>
 
             <HBox spacing="18.0">
-                <VBox spacing="14.0" styleClass="summary-panel" HBox.hgrow="ALWAYS">
-                    <Label fx:id="totalExpensesLabel" text="Total Expenses: PHP 0.00" styleClass="summary-total" />
-                    <Label text="Total Per Category" styleClass="section-title" />
-                    <Label fx:id="categorySummaryLabel" wrapText="true" styleClass="summary-text" />
+
+                <!-- Summary Card -->
+                <VBox spacing="14.0"
+                      prefWidth="380.0"
+                      minWidth="380.0"
+                      styleClass="summary-panel">
+
+                    <Label fx:id="totalExpensesLabel"
+                           text="Total Expenses: ₱0.00"
+                           wrapText="true"
+                           styleClass="summary-total" />
+
+                    <Label text="Total Per Category"
+                           styleClass="section-title" />
+
+                    <Label fx:id="categorySummaryLabel"
+                           wrapText="true"
+                           styleClass="summary-text" />
                 </VBox>
-                <VBox spacing="12.0" styleClass="chart-panel" HBox.hgrow="ALWAYS">
-                    <Label text="Spending by Category" styleClass="section-title" />
-                    <PieChart fx:id="categoryPieChart" legendVisible="true" prefHeight="220.0" />
+
+                <!-- Pie Chart Card -->
+                <VBox spacing="12.0"
+                      prefWidth="520.0"
+                      styleClass="chart-panel"
+                      HBox.hgrow="ALWAYS">
+
+                    <Label text="Spending by Category"
+                           styleClass="section-title" />
+
+                    <PieChart fx:id="categoryPieChart"
+                              legendVisible="true"
+                              prefHeight="180.0"
+                              prefWidth="450.0" />
                 </VBox>
+
             </HBox>
         </VBox>
     </center>

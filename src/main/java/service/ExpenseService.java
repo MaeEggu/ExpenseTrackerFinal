@@ -124,13 +124,16 @@ public class ExpenseService {
     public double convertToPhp(double amount, String currency) {
         return currencyConverter.toPhp(amount, currency);
     }
+    public double getExchangeRate(String currency) {
+        return currencyConverter.getExchangeRate(currency);
+    }
 
     public String getBaseCurrency() {
         return "PHP";
     }
 
     public String getLastExchangeRateUpdateLabel() {
-        return "Manual rates";
+        return currencyConverter.getLastExchangeRateUpdateLabel();
     }
 
     public String getMostRecentExpenseDateLabel() {
